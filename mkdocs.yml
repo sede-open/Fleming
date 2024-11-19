@@ -45,20 +45,20 @@ theme:
     - toc.follow
     - header.autohide
   palette:
-
-    # Dark Mode
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Dark mode
-      primary: custom
-      accent: custom
-
+  
     # Light Mode
     - scheme: default
       toggle:
         icon: material/weather-night
         name: Light mode
+      primary: custom
+      accent: custom
+      
+    # Dark Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
       primary: custom
       accent: custom
 
