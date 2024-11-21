@@ -1,6 +1,6 @@
 # Fleming
 
-<img align="right" src="docs/images/logo.png" title="Logo Discovery" alt="Logo Discovery" width="30%"></a>
+<img align="right" src="docs/images/logo.png" title="Logo Discovery" alt="Logo Discovery" width="33%"></a>
 
 An open-source project of the "brain" of the AI Discovery Tool. Including technical scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
 
