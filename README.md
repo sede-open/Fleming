@@ -22,7 +22,6 @@ The class contains the following methods:
 
 
 ```python
-
 from fleming.discovery.corpus_creation import CorpusCreation
 from pyspark.sql import SparkSession
 
@@ -41,8 +40,7 @@ corpus_creation.write_corpus_to_file(corpus)
 
 A class to train and register a semantic search model.
 
-```python  
-
+```python
 from fleming.discovery.model_train_register import ModelTrainRegister, SemanticSearchModel    
 from pyspark.sql import SparkSession
 
@@ -82,10 +80,8 @@ model_developer.create_registered_model(unique_model_name, input_example, signat
 ## Model Serving
 
 This class creates a model serving endpoint on databricks.
-
    
-```python  
-
+```python
 from fleming.discovery.corpus_creation import CorpusCreation
 from pyspark.sql import SparkSession
 
@@ -130,7 +126,6 @@ A class which allows for querying a model serving endpoint on databricks.
 This class is used to query a model serving endpoint on databricks with a dataset.
 
 ```python
-
 url = "https://example.com/model_endpoint"
 token = "your_auth_token"
     
@@ -146,7 +141,6 @@ try:
     print(response)
 except requests.exceptions.HTTPError as e:
     print(f"Error: {str(e)}")
-
 ```
 
 # Repository Guidelines
@@ -231,10 +225,13 @@ You are now ready to start developing your own functions. Please remember to fol
 > **_NOTE:_**  Ensure you have read the [Release Guidelines](RELEASE.md) before publishing your code.
 
 # Support and contacts
+
 If you encounter any issues or have questions, please reach out to the team by raising an issue on the repo. They will be happy to assist you and provide further information about the project.
 
 # Contributing
+
 Contributions to this project are welcome! If you would like to contribute, please refer to our [Contributing Guide](CONTRIBUTION.md) for guidelines on how to get started. We appreciate your support in making this project even better.
 
 # Licensing
+
 The code in this repository is licensed under the default copyright notice, which can be found in the [LICENSE](LICENSE) file. Please review the license before using or distributing the code.
