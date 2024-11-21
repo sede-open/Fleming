@@ -4,7 +4,7 @@
 
 An open-source project of the "brain" of the AI Discovery Tool. Including technical scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
 
-Databricks, a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
+[Databricks](https://www.databricks.com), a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
 
 By combining data ingestion from GitHub with Databricks' model training and serving capabilities, pipelines can provide a seamless end-to-end solution for processing and analyzing data from GitHub repositories.
 
