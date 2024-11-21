@@ -187,7 +187,6 @@ except requests.exceptions.HTTPError as e:
 3) Create a new environment using the following command:
 ```
     micromamba create -f environment.yml
-
 ```
 
 > **_NOTE:_**  You will need to have conda, python and pip installed to use the command above.
