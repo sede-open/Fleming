@@ -1,12 +1,12 @@
 # Fleming
 
-An open-source project of the "brain" of the AI Discovery Tool. Including techincal scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
+An open-source project of the "brain" of the AI Discovery Tool. Including technical scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
 
 Databricks, a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
 
 By combining data ingestion from GitHub with Databricks' model training and serving capabilities, pipelines can provide a seamless end-to-end solution for processing and analyzing data from GitHub repositories.
 
-The serving endpont designed to process and analyze large volumes of data, enabling efficient data discovery and insights.
+The serving endpoint designed to process and analyze large volumes of data, enabling efficient data discovery and insights.
 
 ![Logo Discovery](docs/images/logo.png) 
 
@@ -182,7 +182,7 @@ except requests.exceptions.HTTPError as e:
 ```
     git clone https://github.com/sede-open/Fleming.git
 ```
-2) Open the respository in VS Code, Visual Studio or your preferered code editor.
+2) Open the repository in VS Code, Visual Studio or your preferred code editor.
 
 3) Create a new environment using the following command:
 ```
