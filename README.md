@@ -62,7 +62,7 @@ model_developer.embed_corpus()
 
 # Define parameters and artifacts
 parameters = {"top_k": 50, "relevancy_score": 0.45}
-input_example = ["Innersource best practices"]
+input_example = ["InnerSource best practices"]
 test_output = ["match 1", "match 2"]
 signature = infer_signature(input_example, test_output, params=parameters)
 artifacts = {
