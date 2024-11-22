@@ -1,5 +1,12 @@
 # Releases 
 
+# V0.0.2
+
+## What's Changed
+* Env Bug Fix with JDK by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/11
+
+**Full Changelog**: https://github.com/sede-open/Fleming/compare/v0.0.1...v0.0.2
+
 # V0.0.1
 
 ## What's Changed

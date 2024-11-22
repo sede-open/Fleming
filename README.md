@@ -1,6 +1,6 @@
 # Fleming
 
-A proposed open-source project of the "brain" of the AI Discovery Tool. Including techincal scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
+An open-source project of the "brain" of the AI Discovery Tool. Including techincal scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
 
 Databricks, a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
 
@@ -165,14 +165,13 @@ except requests.exceptions.HTTPError as e:
 |------------------|-----------------------------------------------------------------------------------------|
 |`setup.py`        | Set up requirements for python package deployment                                       |
 |`environment.yml` | yml file to create an environment with all the dependencies for developers              |
-|`CODE_OF_CONDUCT` | code of conduct                                                                         |
-|`CODEOWNERS`      | codeowners                                                                              |
-|`CONTRIBUTING.yml`| contributing                                                                            |
-|`GOVERNANCE.yml`  | governance                                                                              |
-|`LICENSE.yml`     | license                                                                                 |
-|`RELEASE.yml`     | releases                                                                                |
-|`SUPPORT.yml`     | support                                                                                 |
-|`README.yml`      |  read me documentation                                                             |
+|`CODE_OF_CONDUCT.md` | code of conduct                                                                         |
+|`CODEOWNERS.md`      | codeowners                                                                              |
+|`CONTRIBUTING.md`| contributing                                                                            |
+|`LICENSE`     | license                                                                                 |
+|`RELEASE.md`     | releases                                                                                |
+|`SUPPORT.md`     | support                                                                                 |
+|`README.md`      |  read me documentation                                                             |
 |`.gitignore`      | Informs Git which files to ignore when committing your project to the GitHub repository |
 
 # Developer Guide - How to Use
@@ -181,7 +180,7 @@ except requests.exceptions.HTTPError as e:
 
 1) To get started with developing for this project, clone the repository. 
 ```
-    git clone https://github.com/sede-x/Flemming.git.
+    git clone https://github.com/sede-open/Fleming.git
 ```
 2) Open the respository in VS Code, Visual Studio or your preferered code editor.
 
@@ -197,7 +196,7 @@ except requests.exceptions.HTTPError as e:
 ```
     micromamba activate 
 ```
-You are now ready to start developing your own functions. Please remember to follow Felmming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
+You are now ready to start developing your own functions. Please remember to follow Felming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
 
 5) For better readability of code is would be useful to enable black and isort on autosave by simply adding this to the VSCode user settings json(Ctrl + Shft + P):
 
@@ -233,7 +232,7 @@ You are now ready to start developing your own functions. Please remember to fol
 > **_NOTE:_**  Ensure you have read the [Release Guidelines](RELEASE.md) before publishing your code.
 
 # Support and contacts
-If you encounter any issues or have questions, please reach out to the Innersource-Enablement-Team. They will be happy to assist you and provide further information about the project.
+If you encounter any issues or have questions, please reach out to the team by raising an issue on the repo. They will be happy to assist you and provide further information about the project.
 
 # Contributing
 Contributions to this project are welcome! If you would like to contribute, please refer to our [Contributing Guide](CONTRIBUTION.md) for guidelines on how to get started. We appreciate your support in making this project even better.
