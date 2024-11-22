@@ -32,7 +32,7 @@ dependencies:
     - mkdocs-macros-plugin==1.0.1
     - openjdk=11
     - pip:
-        - databricks-sdk>=0.20.0,<1.0.0 
+        - databricks-sdk>=0.20.0,<1.0.0
         - torch>=2.4.1
         - pyspark>=3.3.0,<3.6.0
         - sentence-transformers>=3.2.0

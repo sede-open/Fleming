@@ -2,7 +2,7 @@
 
 1) To get started with developing for this project, clone the repository. 
 ```
-    git clone https://github.com/sede-x/Flemming.git
+    git clone https://github.com/sede-open/Fleming.git
 ```
 2) Open the respository in VS Code, Visual Studio or your preferered code editor.
 
@@ -18,7 +18,7 @@
 ```
     micromamba activate 
 ```
-You are now ready to start developing your own functions. Please remember to follow Felmming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
+You are now ready to start developing your own functions. Please remember to follow Felming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
 
 5) For better readability of code is would be useful to enable black and isort on autosave by simply adding this to the VSCode user settings json(Ctrl + Shft + P):
 
