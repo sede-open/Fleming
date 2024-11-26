@@ -30,7 +30,7 @@ dependencies:
     - mkdocstrings==0.25.0
     - mkdocstrings-python==1.10.8
     - mkdocs-macros-plugin==1.0.1
-    - openjdk==11
+    - openjdk=11
     - pip:
         - databricks-sdk>=0.20.0,<1.0.0
         - torch>=2.4.1
