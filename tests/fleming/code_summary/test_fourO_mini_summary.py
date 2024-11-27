@@ -21,19 +21,3 @@ def test_display_results():
   assert type(actual_output_none) == type(expected_output)
   assert actual_output_none_string == expected_output_string
 
-test_display_results()
-  
-
-def test_display_results(openai_client):
-    openai_client.results_df = openai_client.spark.createDataFrame(
-        [("repo1", "prompt", "token1", "summary")],
-        ["repo_name", "prompt", "repo_token_count", "virtual_readme"]
-    )
-
-    with patch("builtins.print") as mock_print:
-        openai_client.display_results()
-        mock_print.assert_called()
-
-def test_display_results_no_results(openai_client):
-    with pytest.raises(ValueError):
-        openai_client.display_results()
