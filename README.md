@@ -20,7 +20,6 @@ The class contains the following methods:
 
 2. write_corpus_to_file: Write the corpus to a file from the concatenated columns.
 
-
 ```python
 from fleming.discovery.corpus_creation import CorpusCreation
 from pyspark.sql import SparkSession
