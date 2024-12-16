@@ -30,7 +30,7 @@ def github_repo_data_processor(spark):
 def test_get_token(github_repo_data_processor):
     try:
         token = github_repo_data_processor.get_token()
-    except:
+    except Exception:
         token = None
     assert token is None
 
@@ -115,7 +115,7 @@ def test_concatenate_repo_contents(github_repo_data_processor):
         "FilePath": {
             0: "CONTRIBUTION.md",
             1: "sonar-project.properties",
-            2: "aiacs/evaluate_aiacs.py",
+            2: "src/evaluate.py",
         },
         "DecodedContent": {
             0: "Contribution Model - Please create a PR to contribute",
