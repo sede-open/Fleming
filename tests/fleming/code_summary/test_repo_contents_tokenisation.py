@@ -29,19 +29,18 @@ def github_repo_data_processor(spark):
 
 def test_get_token(github_repo_data_processor):
     try:
-        token=github_repo_data_processor.get_token()
+        token = github_repo_data_processor.get_token()
     except:
-        token=None
+        token = None
     assert token is None
-    
 
 
 def test_num_tokens_from_string(github_repo_data_processor):
     string = "This is a test string."
     encoding_name = "cl100k_base"
     num_tokens = github_repo_data_processor.num_tokens_from_string(
-            string, encoding_name
-        )
+        string, encoding_name
+    )
     print(num_tokens)
     assert num_tokens == 6
 
@@ -106,20 +105,28 @@ def test_data_collection(github_repo_data_processor):
 
 
 def test_concatenate_repo_contents(github_repo_data_processor):
-    data = {'RepoName': {0: 'test_repo', 1: 'test_repo', 2: 'test_repo'},
-    'FileName': {0: 'CONTRIBUTION.md',
-    1: 'sonar-project.properties',
-    2: 'evaluate.py'},
-    'FilePath': {0: 'CONTRIBUTION.md',
-    1: 'sonar-project.properties',
-    2: 'aiacs/evaluate_aiacs.py'},
-    'DecodedContent': {0: 'Contribution Model - Please create a PR to contribute',
-    1: 'sonar.projectKey=yyyyyyy',
-    2: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'},    
-    'TokenCountPerFile': {0: 10, 1: 10, 2: 3297},
-    'CumulativeRepoContent': {0: 10, 1: 20, 2: 3317},
-    'DirectoryLevel': {0: 0, 1: 0, 2: 1}}
-    
+    data = {
+        "RepoName": {0: "test_repo", 1: "test_repo", 2: "test_repo"},
+        "FileName": {
+            0: "CONTRIBUTION.md",
+            1: "sonar-project.properties",
+            2: "evaluate.py",
+        },
+        "FilePath": {
+            0: "CONTRIBUTION.md",
+            1: "sonar-project.properties",
+            2: "aiacs/evaluate_aiacs.py",
+        },
+        "DecodedContent": {
+            0: "Contribution Model - Please create a PR to contribute",
+            1: "sonar.projectKey=yyyyyyy",
+            2: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        },
+        "TokenCountPerFile": {0: 10, 1: 10, 2: 3297},
+        "CumulativeRepoContent": {0: 10, 1: 20, 2: 3317},
+        "DirectoryLevel": {0: 0, 1: 0, 2: 1},
+    }
+
     repo_contents_df = pd.DataFrame(data)
     result_df = github_repo_data_processor.concatenate_repo_contents(repo_contents_df)
 
