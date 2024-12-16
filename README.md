@@ -1,14 +1,14 @@
 # Fleming
 
-A proposed open-source project of the "brain" of the AI Discovery Tool. Including techincal scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
+<img align="right" src="docs/images/logo.png" title="Logo Discovery" alt="Logo Discovery" width="33%"></a>
 
-Databricks, a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
+An open-source project of the "brain" of the AI Discovery Tool. Including technical scripts to build, register, serve and query models on databricks which use Semantic Search. These models can be run on cpu and not gpu providing signiifcant cost reductions.
+
+[Databricks](https://www.databricks.com), a popular big data processing and analytics platform, is utilized to build and train machine learning models on the ingested data.
 
 By combining data ingestion from GitHub with Databricks' model training and serving capabilities, pipelines can provide a seamless end-to-end solution for processing and analyzing data from GitHub repositories.
 
-The serving endpont designed to process and analyze large volumes of data, enabling efficient data discovery and insights.
-
-![Logo Discovery](docs/images/logo.png) 
+The serving endpoint designed to process and analyze large volumes of data, enabling efficient data discovery and insights.
 
 ## Corpus Creation
 
@@ -20,9 +20,7 @@ The class contains the following methods:
 
 2. write_corpus_to_file: Write the corpus to a file from the concatenated columns.
 
-
 ```python
-
 from fleming.discovery.corpus_creation import CorpusCreation
 from pyspark.sql import SparkSession
 
@@ -41,8 +39,7 @@ corpus_creation.write_corpus_to_file(corpus)
 
 A class to train and register a semantic search model.
 
-```python  
-
+```python
 from fleming.discovery.model_train_register import ModelTrainRegister, SemanticSearchModel    
 from pyspark.sql import SparkSession
 
@@ -64,7 +61,7 @@ model_developer.embed_corpus()
 
 # Define parameters and artifacts
 parameters = {"top_k": 50, "relevancy_score": 0.45}
-input_example = ["Innersource best practices"]
+input_example = ["InnerSource best practices"]
 test_output = ["match 1", "match 2"]
 signature = infer_signature(input_example, test_output, params=parameters)
 artifacts = {
@@ -82,10 +79,8 @@ model_developer.create_registered_model(unique_model_name, input_example, signat
 ## Model Serving
 
 This class creates a model serving endpoint on databricks.
-
    
-```python  
-
+```python
 from fleming.discovery.corpus_creation import CorpusCreation
 from pyspark.sql import SparkSession
 
@@ -130,7 +125,6 @@ A class which allows for querying a model serving endpoint on databricks.
 This class is used to query a model serving endpoint on databricks with a dataset.
 
 ```python
-
 url = "https://example.com/model_endpoint"
 token = "your_auth_token"
     
@@ -146,7 +140,6 @@ try:
     print(response)
 except requests.exceptions.HTTPError as e:
     print(f"Error: {str(e)}")
-
 ```
 
 # Repository Guidelines
@@ -165,14 +158,13 @@ except requests.exceptions.HTTPError as e:
 |------------------|-----------------------------------------------------------------------------------------|
 |`setup.py`        | Set up requirements for python package deployment                                       |
 |`environment.yml` | yml file to create an environment with all the dependencies for developers              |
-|`CODE_OF_CONDUCT` | code of conduct                                                                         |
-|`CODEOWNERS`      | codeowners                                                                              |
-|`CONTRIBUTING.yml`| contributing                                                                            |
-|`GOVERNANCE.yml`  | governance                                                                              |
-|`LICENSE.yml`     | license                                                                                 |
-|`RELEASE.yml`     | releases                                                                                |
-|`SUPPORT.yml`     | support                                                                                 |
-|`README.yml`      |  read me documentation                                                             |
+|`CODE_OF_CONDUCT.md` | code of conduct                                                                         |
+|`CODEOWNERS.md`      | codeowners                                                                              |
+|`CONTRIBUTING.md`| contributing                                                                            |
+|`LICENSE`     | license                                                                                 |
+|`RELEASE.md`     | releases                                                                                |
+|`SUPPORT.md`     | support                                                                                 |
+|`README.md`      |  read me documentation                                                             |
 |`.gitignore`      | Informs Git which files to ignore when committing your project to the GitHub repository |
 
 # Developer Guide - How to Use
@@ -181,14 +173,13 @@ except requests.exceptions.HTTPError as e:
 
 1) To get started with developing for this project, clone the repository. 
 ```
-    git clone https://github.com/sede-x/Flemming.git.
+    git clone https://github.com/sede-open/Fleming.git
 ```
-2) Open the respository in VS Code, Visual Studio or your preferered code editor.
+2) Open the repository in VS Code, Visual Studio or your preferred code editor.
 
 3) Create a new environment using the following command:
 ```
     micromamba create -f environment.yml
-
 ```
 
 > **_NOTE:_**  You will need to have conda, python and pip installed to use the command above.
@@ -197,7 +188,7 @@ except requests.exceptions.HTTPError as e:
 ```
     micromamba activate 
 ```
-You are now ready to start developing your own functions. Please remember to follow Felmming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
+You are now ready to start developing your own functions. Please remember to follow Felming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
 
 5) For better readability of code is would be useful to enable black and isort on autosave by simply adding this to the VSCode user settings json(Ctrl + Shft + P):
 
@@ -233,10 +224,13 @@ You are now ready to start developing your own functions. Please remember to fol
 > **_NOTE:_**  Ensure you have read the [Release Guidelines](RELEASE.md) before publishing your code.
 
 # Support and contacts
-If you encounter any issues or have questions, please reach out to the Innersource-Enablement-Team. They will be happy to assist you and provide further information about the project.
+
+If you encounter any issues or have questions, please reach out to the team by raising an issue on the repo. They will be happy to assist you and provide further information about the project.
 
 # Contributing
+
 Contributions to this project are welcome! If you would like to contribute, please refer to our [Contributing Guide](CONTRIBUTION.md) for guidelines on how to get started. We appreciate your support in making this project even better.
 
 # Licensing
+
 The code in this repository is licensed under the default copyright notice, which can be found in the [LICENSE](LICENSE) file. Please review the license before using or distributing the code.
