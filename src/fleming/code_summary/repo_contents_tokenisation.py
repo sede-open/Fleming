@@ -3,10 +3,10 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 import re
-from github import Github
 import jwt
 import tiktoken
 from pyspark.sql import DataFrame, SparkSession
+from github import Github
 
 
 class GitHubRepoDataProcessor:
@@ -189,10 +189,10 @@ class GitHubRepoDataProcessor:
         try:
             soup = BeautifulSoup(html, "html.parser")
             text = soup.get_text()
-            text = re.sub(r"\[.*?\]", "", text)
-            text = re.sub(r"\n", " ", text)
-            text = re.sub(r"\n\n", " ", text)
-            text = re.sub(r"[_{}*//#\[\]]", "", text)
+            text = re.sub(r"\[[^\]]*\]", "", text)
+            text = text.replace("\n", " ")
+            text = text.replace("\n\n", " ")
+            text = re.sub(r"[_{}*#\[\]]", "", text)
             text = re.sub(r"\s+", " ", text).strip()
             return text
         except Exception:
@@ -333,10 +333,10 @@ class GitHubRepoDataProcessor:
         grouped = repo_contents_df.groupby("RepoName")
 
         for repo_name, group in grouped:
-            group = group[group["decoded_content"].str.strip() != ""]
-            concatenated_content = ", ".join(group["decoded_content"])
-            total_token_count = group["token_count_per_file"].sum()
-            files_included = ", ".join(group["file_name"])
+            group = group[group["DecodedContent"].str.strip() != ""]
+            concatenated_content = ", ".join(group["DecodedContent"])
+            total_token_count = group["TokenCountPerFile"].sum()
+            files_included = ", ".join(group["FileName"])
             result.append(
                 (repo_name, concatenated_content, total_token_count, files_included)
             )

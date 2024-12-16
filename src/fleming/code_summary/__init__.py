@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .repo_contents_tokenisation import RepoContentsTokenisation
-from .fourO_mini_summary import FourOMiniSummary
+from .repo_contents_tokenisation import GitHubRepoDataProcessor
+from .fourO_mini_summary import OpenAIClient
