@@ -1,4 +1,36 @@
-# Installation
+# Installation Process
+
+## Prerequisite
+
+### Python
+
+There are a few things to note before using the Fleming. The following prerequisites will need to be installed on your local machine.
+
+Python version 3.9 >= and < 3.12 should be installed. Check which python version you have with the following command:
+
+    python --version
+
+Find the latest python version [here](https://www.python.org/downloads/) and ensure your python path is set up correctly on your machine.
+
+### Python Package Installers
+
+Installing Fleming can be done using the package installer [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+
+### Java
+
+To use Fleming in your own environment that leverages [pyspark](https://spark.apache.org/docs/latest/api/python/getting_started/install.html), Java 8 or later is a [prerequisite](https://spark.apache.org/docs/latest/api/python/getting_started/install.html#dependencies). See below for suggestions to install Java in your development environment.
+
+Follow the official Java JDK installation documentation [here.](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html)
+
+- [Windows](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html)
+- [Mac OS](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html)
+- [Linux](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html)
+
+!!! note 
+    Windows requires an additional installation of a file called **winutils.exe**. Please see this [repo](https://github.com/steveloughran/winutils) for more information.
+
+
+## Installation
 
 1) To get started with developing for this project, clone the repository. 
 ```

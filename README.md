@@ -207,7 +207,7 @@ Find the latest python version [here](https://www.python.org/downloads/) and ens
 
 ### Python Package Installers
 
-Installing the Fleming can be done using the package installer [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+Installing Fleming can be done using the package installer [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
 
 ### Java
 
@@ -239,7 +239,7 @@ Follow the official Java JDK installation documentation [here.](https://docs.ora
 
 4) Activate your newly set up environment using the following command:
 ```
-    micromamba activate 
+    micromamba activate fleming
 ```
 You are now ready to start developing your own functions. Please remember to follow Felming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
 
