@@ -32,6 +32,7 @@ dependencies:
     - mkdocs-macros-plugin==1.0.1
     - openjdk=11
     - tiktoken==0.8.0
+    - time>=1.0.0
     - pip:
         - databricks-sdk>=0.20.0,<1.0.0
         - torch>=2.4.1
