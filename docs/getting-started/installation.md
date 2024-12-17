@@ -16,7 +16,7 @@
 
 4) Activate your newly set up environment using the following command:
 ```
-    micromamba activate 
+    micromamba activate fleming
 ```
 You are now ready to start developing your own functions. Please remember to follow Felming's development lifecycle to maintain clarity and efficiency for a fully robust self serving platform. 
 

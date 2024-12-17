@@ -31,12 +31,12 @@ dependencies:
     - mkdocstrings-python==1.10.8
     - mkdocs-macros-plugin==1.0.1
     - openjdk=11
-    - time
-    - tiktoken
+    - time==3.13.1
+    - tiktoken==0.8.0
     - pip:
         - databricks-sdk>=0.20.0,<1.0.0
         - torch>=2.4.1
-        - pyspark>=3.3.0,<3.6.0
+        - pyspark>=3.4.0,<3.6.0
         - sentence-transformers>=3.2.0
         - mlflow>=2.0.1
         - beautifulsoup4==4.12.3
