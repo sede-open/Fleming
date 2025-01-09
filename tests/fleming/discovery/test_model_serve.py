@@ -16,6 +16,12 @@ from unittest.mock import MagicMock, patch
 
 from src.fleming.discovery.model_serve import ModelServe
 
+import os
+import sys
+
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+
 
 def test_deploy_endpoint(spark_session):
     # Mock the requests.put response

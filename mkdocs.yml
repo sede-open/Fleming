@@ -123,8 +123,7 @@ nav:
           - ModelServe: code-reference/ModelServe.md
           - ModelQuery: code-reference/ModelQuery.md
       - Summary: 
-          - GPT-4oMini: code-reference/4o-MiniSummary.md
-          - RepoContentsTokenisation: code-reference/RepoContentsTokenisation.md
+          - CodeSummary: code-reference/CodeSummary.md
   - Releases: releases/fleming.md
   - Blog: blog/index.md
   - Contact Us:

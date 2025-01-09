@@ -2,19 +2,20 @@ import logging
 import requests
 from pyspark.sql import DataFrame, SparkSession
 
+
 class OpenAIClient:
     """
     Class to interact with the OpenAI API to generate content based on a prompt and source code.
 
     The class contains the following methods:
 
-    1. call_openai: Call the OpenAI API to generate content based on the provided prompt and source code.
+    1. call_openai: Call the OpenAI API to generate documentation with AI based on the provided prompt and source code.
     2. save_results: Save the generated results to a specified output table.
 
     Example
     --------
     ```python
-    from fleming.code_summary.4o-mini_summary import call_openai
+    from fleming.code_summary.fourO_mini_summary import call_openai
     from pyspark.sql import SparkSession
 
     # Not required if using Databricks
@@ -48,7 +49,15 @@ class OpenAIClient:
     endpoint: str
     headers: dict
 
-    def __init__(self, spark: SparkSession, input_spark_df: DataFrame, output_table_name: str, prompt: str, api_key: str, endpoint: str) -> None:
+    def __init__(
+        self,
+        spark: SparkSession,
+        input_spark_df: DataFrame,
+        output_table_name: str,
+        prompt: str,
+        api_key: str,
+        endpoint: str,
+    ) -> None:
         self.spark = spark
         self.input_spark_df = input_spark_df
         self.output_table_name = output_table_name
@@ -61,7 +70,9 @@ class OpenAIClient:
         }
         self.results_df = None  # Initialize an instance variable to store results
 
-    def call_openai(self, title :str, concatenated_content: str, total_token_count: str) -> None:
+    def call_openai(
+        self, title: str, concatenated_content: str, total_token_count: str
+    ) -> None:
         """
         Call the OpenAI API to generate summarised content based on the provided prompt and source content.
 
@@ -72,11 +83,11 @@ class OpenAIClient:
 
         Returns: results_df pyspark dataframe containing summarisation of each entry
         """
-        
+
         results = []
         repo_contents_df = self.input_spark_df
         repo_contents_df = repo_contents_df.limit(3)
-  
+
         for row in repo_contents_df.collect():
             input_source_code = row[concatenated_content]
             repo_name = row[title]
@@ -89,17 +100,19 @@ class OpenAIClient:
                         "content": [
                             {
                                 "type": "text",
-                                "text": f"{self.prompt}{input_source_code}"
+                                "text": f"{self.prompt}{input_source_code}",
                             }
-                        ]
+                        ],
                     }
                 ],
                 "temperature": 0.0,
-                "top_p": 0.95
+                "top_p": 0.95,
             }
 
             try:
-                response = requests.post(self.endpoint, headers=self.headers, json=payload)
+                response = requests.post(
+                    self.endpoint, headers=self.headers, json=payload
+                )
                 response.raise_for_status()
                 json_dict = response.json()
                 output = json_dict["choices"][0]["message"]["content"]
@@ -110,20 +123,21 @@ class OpenAIClient:
                 logging.exception("Failed to make the request.")
                 raise SystemExit(f"Failed to make the request. Error: {e}")
 
-        self.results_df = self.spark.createDataFrame(results, ["repo_name", "prompt", "repo_token_count", "virtual_readme"])
-
+        self.results_df = self.spark.createDataFrame(
+            results, ["repo_name", "prompt", "repo_token_count", "virtual_readme"]
+        )
 
     def display_results(self) -> None:
         """
         Display the generated results.
-        
+
         Returns:
         results_df dataframe gets displayed
         """
         if self.results_df is not None:
-          display(self.results_df)
+            display(self.results_df)
         else:
-          raise ValueError("No results to display. Please call call_openai() first.")
+            raise ValueError("No results to display. Please call call_openai() first.")
 
     def save_results(self) -> None:
         """
@@ -133,6 +147,8 @@ class OpenAIClient:
         None
         """
         if self.results_df is not None:
-            self.results_df.write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"hive_metastore.dev_innersource.{self.output_table_name}")
+            self.results_df.write.mode("overwrite").option(
+                "mergeSchema", "true"
+            ).saveAsTable(f"hive_metastore.dev_innersource.{self.output_table_name}")
         else:
             raise ValueError("No results to save. Please call call_openai() first.")

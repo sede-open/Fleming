@@ -16,6 +16,11 @@ import pytest
 
 from src.fleming.discovery.corpus_creation import CorpusTextCreation
 from tests.conftest import spark_session
+import os
+import sys
+
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
 
 @pytest.fixture
