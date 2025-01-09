@@ -13,14 +13,20 @@
 # limitations under the License.
 
 import json
-from unittest.mock import MagicMock, patch
 
+import os
+import sys
+from unittest.mock import MagicMock, patch
 import numpy as np
 import pandas as pd
 import pytest
 import requests
 
 from src.fleming.discovery.model_query import ModelQuery
+
+
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
 
 @pytest.fixture
