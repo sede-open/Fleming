@@ -3,12 +3,16 @@ from pyspark.sql import SparkSession
 import pandas as pd
 from unittest.mock import patch, MagicMock, mock_open
 from github import Github
+import os
+import sys
 import time
 
 from src.fleming.code_summary.repo_contents_tokenisation import (
     GitHubRepoDataProcessor,
 )
 
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
 @pytest.fixture(scope="module")
 def spark():

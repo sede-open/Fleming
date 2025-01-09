@@ -165,6 +165,31 @@ repo_contents_df = github_repo_data_processor.data_collection()
 repo_contents_df_concat = github_repo_data_processor.concatenate_repo_contents(repo_contents_df)
 
 ```
+## Code Summary
+
+Class to interact with the OpenAI API to generate content based on a prompt and source code.
+
+The class contains the following methods:
+
+1. call_openai: Call the OpenAI API to generate documentation with AI based on the provided prompt and source code.
+2. save_results: Save the generated results to a specified output table.
+
+```python
+from fleming.code_summary.fourO_mini_summary import call_openai
+from pyspark.sql import SparkSession
+
+# Not required if using Databricks
+spark = SparkSession.builder.appName("openai_client").getOrCreate()
+
+spark_input_df = "your_spark_input_df"
+output_table_name = "your_output_table"
+prompt = "Your prompt here"
+
+client = OpenAIClient(spark, delta_table, output_table_name, prompt)
+client.call_openai()
+
+```
+
 
 # Repository Guidelines
 
@@ -211,7 +236,7 @@ Installing Fleming can be done using the package installer [Micromamba](https://
 
 ### Java
 
-To use Fleming in your own environment that leverages [pyspark](https://spark.apache.org/docs/latest/api/python/getting_started/install.html), Java 8 or later is a [prerequisite](https://spark.apache.org/docs/latest/api/python/getting_started/install.html#dependencies). See below for suggestions to install Java in your development environment.
+To use Fleming in your own environment that leverages [pyspark](https://spark.apache.org/docs/latest/api/python/getting_started/install.html), Java 8 or later is a [prerequisite](https://spark.apache.org/docs/latest/api/python/getting_started/install.html#dependencies). See below for suggestions to install Java in your development environment. It's worth noting, that currently JDK 23 is not compatible with PySpark on Windows. 
 
 Follow the official Java JDK installation documentation [here.](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html)
 
