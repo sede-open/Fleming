@@ -14,6 +14,7 @@ from src.fleming.code_summary.repo_contents_tokenisation import (
 os.environ["PYSPARK_PYTHON"] = sys.executable
 os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
+
 @pytest.fixture(scope="module")
 def spark():
     return SparkSession.builder.master("local").appName("test").getOrCreate()
