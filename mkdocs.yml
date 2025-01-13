@@ -119,6 +119,7 @@ nav:
           - Calling the Endpoint: getting-started/calling-the-endpoint.md
       - GitHub Repository Summary:
           - Github Extraction and Tokenisation: getting-started/tokenisation-of-git-repo.md
+          - Code Summarisation using LLM: getting-started/code-summary-how-to.md
   - Code Reference:
       - Discovery:
           - CorpusTextCreation: code-reference/CorpusTextCreation.md
@@ -126,7 +127,7 @@ nav:
           - ModelServe: code-reference/ModelServe.md
           - ModelQuery: code-reference/ModelQuery.md
       - Summary: 
-          - GPT-4oMini: code-reference/4o-MiniSummary.md
+          - Code Summary with GPT-4oMini: code-reference/4o-MiniSummary.md
           - RepoContentsTokenisation: code-reference/RepoContentsTokenisation.md
   - Releases: releases/fleming.md
   - Blog: blog/index.md

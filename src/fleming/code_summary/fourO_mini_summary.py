@@ -28,7 +28,7 @@ class OpenAIClient:
 
     api_key = "your_api_key"
     endpoint = "https://api.openai.com/yourendpointhere"
-    
+
     headers = {
     "Content-Type": "application/json",
     "api-key": api_key,
@@ -84,11 +84,12 @@ class OpenAIClient:
         Call the OpenAI API to generate summarised content based on the provided prompt and source content.
 
         Parameters:
-        title: str - Column name for column containing summarised text title
-        concatenated_content: str - Column name for column containing concatenated content
-        total_token_count: str - Column name for column containing total token count
+            title (str): Column name for column containing summarised text title
+            concatenated_content (str): Column name for column containing concatenated content
+            total_token_count (str): Column name for column containing total token count
 
-        Returns: results_df pyspark dataframe containing summarisation of each entry
+        Returns:
+            results_df (DataFrame): PySpark DataFrame containing summarisation of each entry
         """
 
         results = []
@@ -139,7 +140,7 @@ class OpenAIClient:
         Display the generated results.
 
         Returns:
-        results_df dataframe gets displayed
+            results_df(pyspark_df): returns image of dataframe
         """
         if self.results_df is not None:
             display(self.results_df)
@@ -151,7 +152,7 @@ class OpenAIClient:
         Save the generated results to the specified output table.
 
         Returns:
-        None
+            None
         """
         if self.results_df is not None:
             self.results_df.write.mode("overwrite").option(

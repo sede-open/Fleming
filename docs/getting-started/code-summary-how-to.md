@@ -1,8 +1,11 @@
+# Code Summarisation Using LLM for Search Index Enhancement
+
+# Documentation
 Once you have extracted and concatenated the contents of a repository, this class can be used to then generate descriptive documentation using Azure OpenAI. Please note, this class requires you to have a working Azure OpenAI API Key. 
 
 This class then authenticates to the API, and passes in the concatenated repository content with a prompt of your choosing (an example has been provided below). The output is descriptive documentation that identifies code functionality, which can then be indexed by Fleming, to allow users to find specific code functionality that may not have been sufficiently detailed in the readme, or hidden by a domain context.
 
-For more information about options within the Class please follow the documentation under the [code-reference](../code-reference/40-MiniSummary.md) section.
+For more information about options within the Class please follow the documentation under the [code-reference](../code-reference/4o-MiniSummary.md) section.
 
 # Example
 
