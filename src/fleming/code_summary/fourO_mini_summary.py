@@ -5,17 +5,17 @@ from pyspark.sql import DataFrame, SparkSession
 
 class OpenAIClient:
     """
-    Class to interact with the OpenAI API to generate content based on a prompt and source code.
+    Class to interact with the OpenAI API to generate documentation using AI based on a prompt and source code.
 
     The class contains the following methods:
 
-    1. call_openai: Call the OpenAI API to generate content based on the provided prompt and source code.
+    1. call_openai: Authenticate to and call the OpenAI API to generate documentation based on the provided prompt and source code.
     2. save_results: Save the generated results to a specified output table.
 
     Example
     --------
     ```python
-    from fleming.code_summary.4o-mini_summary import call_openai
+    from fleming.code_summary.fourO_mini_summary import call_openai
     from pyspark.sql import SparkSession
 
     # Not required if using Databricks
@@ -23,9 +23,18 @@ class OpenAIClient:
 
     spark_input_df = "your_spark_input_df"
     output_table_name = "your_output_table"
-    prompt = "Your prompt here"
 
-    client = OpenAIClient(spark, delta_table, output_table_name, prompt)
+    prompt = "The following code is the contents of a repository, generate a short summary paragraph describing what the repository purpose is. A paragraph detailing the key functionalities and technologies integrate with and a list of key words associated with this repository underneath. Focus on the purpose of the code contained in the repository, and the technologies, data and platforms it integrates with"
+
+    api_key = "your_api_key"
+    endpoint = "https://api.openai.com/yourendpointhere"
+    
+    headers = {
+    "Content-Type": "application/json",
+    "api-key": api_key,
+    }
+
+    client = OpenAIClient(spark, delta_table, output_table_name, prompt, api_key, endpoint, headers)
     client.call_openai()
     ```
 
@@ -34,8 +43,6 @@ class OpenAIClient:
         input_spark_df (DataFrame): Source spark DataFrame containing the input data
         output_table_name (str): Name of the output table to save results
         prompt (str): Prompt to send to the OpenAI API
-
-    Attributes:
         api_key (str): API key for OpenAI
         endpoint (str): Endpoint for OpenAI API
         headers (dict): Headers for the API request

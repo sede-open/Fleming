@@ -165,6 +165,35 @@ repo_contents_df = github_repo_data_processor.data_collection()
 repo_contents_df_concat = github_repo_data_processor.concatenate_repo_contents(repo_contents_df)
 
 ```
+## Code Summarisation
+
+This class authenticates to the Azure OpenAI API and passes the concatenated repository contents into the LLM with an accompanying prompt to generate documentation. 
+
+```python
+    from fleming.code_summary.fourO_mini_summary import call_openai
+    from pyspark.sql import SparkSession
+
+    # Not required if using Databricks
+    spark = SparkSession.builder.appName("openai_client").getOrCreate()
+
+    spark_input_df = "your_spark_input_df"
+    output_table_name = "your_output_table"
+    
+    prompt = "The following code is the contents of a repository, generate a short summary paragraph describing what the repository purpose is. A paragraph detailing the key functionalities and technologies integrate with and a list of key words associated with this repository underneath. Focus on the purpose of the code contained in the repository, and the technologies, data and platforms it integrates with"
+
+    api_key = "your_api_key"
+    endpoint = "https://api.openai.com/yourendpointhere"
+    
+    headers = {
+    "Content-Type": "application/json",
+    "api-key": api_key,
+    }
+
+    client = OpenAIClient(spark, delta_table, output_table_name, prompt, api_key, endpoint, headers)
+
+    client.call_openai()    
+```
+
 
 # Repository Guidelines
 
