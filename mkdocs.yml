@@ -3,7 +3,7 @@ site_name: Project Fleming - The Brain
 site_url:  https://projectfleming.tech
 site_author: Innersource Enablement Team
 site_description: >-
-    This is the documentation for the core brain of the project Fleming for the Innersource initiative.
+    This is the documentation for the core brain of the project Fleming for the InnerSource initiative.
     It contains information on how to use the project, how to contribute to it,
     and how to deploy it.
 # Repository
@@ -112,15 +112,23 @@ nav:
   - Home: index.md
   - Getting started:
       - Installation: getting-started/installation.md
-      - Creating the Corpus: getting-started/creating-the-corpus.md
-      - Creating the Model: getting-started/creating-the-model.md
-      - Serving the Model: getting-started/serving-the-model.md
-      - Calling the Endpoint: getting-started/calling-the-endpoint.md
+      - AI Powered Discovery Tool:
+          - Creating the Corpus: getting-started/creating-the-corpus.md
+          - Creating the Model: getting-started/creating-the-model.md
+          - Serving the Model: getting-started/serving-the-model.md
+          - Calling the Endpoint: getting-started/calling-the-endpoint.md
+      - GitHub Repository Summary:
+          - Github Extraction and Tokenisation: getting-started/tokenisation-of-git-repo.md
+          - Code Summarisation using LLM: getting-started/code-summary-how-to.md
   - Code Reference:
-      - CorpusTextCreation: code-reference/CorpusTextCreation.md
-      - ModelTrainRegister: code-reference/ModelTrainRegister.md
-      - ModelServe: code-reference/ModelServe.md
-      - ModelQuery: code-reference/ModelQuery.md
+      - Discovery:
+          - CorpusTextCreation: code-reference/CorpusTextCreation.md
+          - ModelTrainRegister: code-reference/ModelTrainRegister.md
+          - ModelServe: code-reference/ModelServe.md
+          - ModelQuery: code-reference/ModelQuery.md
+      - Summary: 
+          - Code Summary with GPT-4oMini: code-reference/4o-MiniSummary.md
+          - RepoContentsTokenisation: code-reference/RepoContentsTokenisation.md
   - Releases: releases/fleming.md
   - Blog: blog/index.md
   - Contact Us:
