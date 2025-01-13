@@ -1,5 +1,19 @@
 # Releases 
 
+# V0.0.3
+
+## What's Changed
+* Develop to Main - Typo by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/16
+* Improve docs - README by @spier in https://github.com/sede-open/Fleming/pull/15
+* Feature/00004 - Extracting GitHub Repo Contents and Concatenating for Summarisation by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/17
+* Develop to Main by @BensGitShell in https://github.com/sede-open/Fleming/pull/20
+
+## New Contributors
+* @spier made their first contribution in https://github.com/sede-open/Fleming/pull/15
+* @BensGitShell made their first contribution in https://github.com/sede-open/Fleming/pull/20
+
+**Full Changelog**: https://github.com/sede-open/Fleming/compare/v0.0.2...v0.0.3
+
 # V0.0.2
 
 ## What's Changed
