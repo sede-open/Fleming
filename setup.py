@@ -26,6 +26,9 @@ from setuptools import find_packages, setup
 
 here = pathlib.Path(__file__).parent.resolve()
 
+long_description = (here / "README-PYPI.md").read_text()
+
+
 INSTALL_REQUIRES = [
     "pytest==7.4.0",
     "pyspark>=3.3.0,<3.6.0",
@@ -35,6 +38,21 @@ INSTALL_REQUIRES = [
     "black>=24.1.0",
     "nltk>=3.8.2",  # Updated to a secure version,
     "torch>=2.4.1",
+    "tiktoken>=0.8.0",
+    "time>=1.0.0",
+    "databricks-sdk>=0.20.0,<1.0.0",
+    "beautifulsoup4==4.12.3",
+    "PyGithub==2.5.0",
+    "jwt==1.3.1",
+    "pytest-mock==3.14.0",
+    "requests<=2.32.3",
+    "numpy>=1.23.4,<2.0.0",
+    "pandas>=1.5.2,<2.2.0",
+    "mkdocs-material==9.5.20",
+    "mkdocs-material-extensions==1.3.1",
+    "mkdocstrings==0.25.0",
+    "mkdocstrings-python==1.10.8",
+    "mkdocs-macros-plugin==1.0.1"    
 ]
 
 PYSPARK_PACKAGES = [
@@ -46,8 +64,11 @@ EXTRAS_DEPENDENCIES: dict[str, list[str]] = {
 }
 
 setup(
-    name="Fleming",
+    name="project-fleming",
     url="https://github.com/sede-open/Fleming",
+    description="Fleming is a library that helps you to create models using PySpark to run on CPU.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
@@ -59,7 +80,7 @@ setup(
         "Issue Tracker": "https://github.com/sede-open/Fleming/issues",
         "Source": "https://github.com/sede-open/Fleming",
     },
-    version="0.0.1",
+    version="0.0.4",
     package_dir={"": "src"},
     include_package_data=True,
     packages=find_packages(where="src"),
