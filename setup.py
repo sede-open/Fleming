@@ -66,6 +66,7 @@ EXTRAS_DEPENDENCIES: dict[str, list[str]] = {
 setup(
     name="project-fleming",
     url="https://github.com/sede-open/Fleming",
+    description="Fleming is a library that helps you to create models using PySpark to run on CPU.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
