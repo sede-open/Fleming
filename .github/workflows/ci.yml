@@ -26,7 +26,8 @@ jobs:
             mkdocs-material- 
       - run: pip install mkdocs-material==9.5.20
       - run: pip install mkdocs-material-extensions==1.3.1
-      - run: pip install mkdocstrings==0.25.0
+      - run: pip install mkdocstrings>=0.26.1
+      - run: pip install mkdocs-autorefs>=1.4
       - run: pip install mkdocstrings-python==1.10.8
       - run: pip install mkdocs-macros-plugin==1.0.1
       - run: mkdocs gh-deploy --force
