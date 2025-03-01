@@ -3,7 +3,7 @@
 
 # Documentation
 
-The first step is to create a corpus.txt file, this includes all the valuse you will search over. The below function ingests a dataframe each row being a seperate entry into the corpus. 
+The first step is to create a corpus.txt file, this includes all the values you will search over. The below function ingests a dataframe each row being a seperate entry into the corpus. 
 
 Please find an example below.
 
