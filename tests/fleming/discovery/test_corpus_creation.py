@@ -20,8 +20,8 @@ from tests.conftest import spark_session
 
 @pytest.fixture
 def corpus_df(spark_session):
-    data = [("John", "Doe", 30), ("Jane", "Doe", 25)]
-    columns = ["first_name", "last_name", "age"]
+    data = [("John", "Doe", 30, "John is a tall man with skills in databricks." ,"http//www.example.com"), ("Jane", "Doe", 25, "Jane is a short woman with skills in python.", "http//www.example.come")]
+    columns = ["first_name", "last_name", "age", "description", "link"]
     return spark_session.createDataFrame(data, columns)
 
 
@@ -33,13 +33,16 @@ def corpus_file_path():
 def test_concat_columns(corpus_df):
     corpus_file_path = "/tmp/test_corpus.txt"
     corpus_creation = CorpusTextCreation(spark_session, corpus_df, corpus_file_path)
-    concatenated_list = corpus_creation.concat_columns()
-    expected_list = ["John Doe 30", "Jane Doe 25"]
+    concatenated_list = corpus_creation.concat_columns(corpus_df, item_name_column="first_name", item_link_column="link", item_summmary_column="description")
+    expected_list = [
+    '{"Name":"John","Link":"http//www.example.com","Summary":"John is a tall man with skills in databricks."}{"filter":{"last_name":"Doe","age":"30"}}',
+    '{"Name":"Jane","Link":"http//www.example.come","Summary":"Jane is a short woman with skills in python."}{"filter":{"last_name":"Doe","age":"25"}}'
+    ]
     assert concatenated_list == expected_list
 
 
 def test_write_corpus_to_file(corpus_df):
     corpus_file_path = "/tmp/test_corpus.txt"
     corpus_creation = CorpusTextCreation(spark_session, corpus_df, corpus_file_path)
-    concatenated_df = corpus_creation.concat_columns()
+    concatenated_df = corpus_creation.concat_columns(corpus_df,"first_name", "link", "description")
     corpus_creation.write_corpus_to_file(concatenated_df)

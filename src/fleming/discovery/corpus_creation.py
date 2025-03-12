@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import logging
-from pyspark.sql.functions import concat_ws
+from pyspark.sql.functions import concat_ws, expr,to_json, col, create_map, lit
 from pyspark.sql import DataFrame, SparkSession
 
 
@@ -23,7 +23,7 @@ class CorpusTextCreation:
 
     The class contains the following methods:
 
-    1. concat_columns: Concatenate the columns to create the corpus from the dataframe. This will take all the columns in the dataframe and concatenate them to create the corpus.
+    1. concat_columns: Concatenate the columns to create the corpus from the dataframe. This will take all the columns in the dataframe and concatenate them to create the corpus in the correct format for the Fleming Frontend.
     2. write_corpus_to_file: Write the corpus to a file from the concatenated columns.
 
       Example
@@ -40,7 +40,7 @@ class CorpusTextCreation:
     corpus_file_path = "/tmp/search_corpus.txt"
 
     corpus_creation = CorpusCreation(corpus_df, corpus_file_path)
-    corpus = corpus_creation.concat_columns()
+    corpus = corpus_creation.concat_columns("RepoName", "RepoLink", "RepoDescription")
     corpus_creation.write_corpus_to_file(corpus)
 
     ```
@@ -80,6 +80,40 @@ class CorpusTextCreation:
         )
 
         corpus = [row["ConcatColumns"] for row in df.collect()]
+
+        return corpus
+    
+    def concat_columns(self, df, item_name_column, item_link_column, item_summmary_column) -> list:
+        """
+        Concatenate the columns to create the corpus
+
+        Parameters:
+        df(df): Cleaned dataframe
+
+        Returns:
+        corpus(list): List of concatenated columns with the format of each string consising of the following:
+
+        Example:
+        {"Name":"Fleming","Link":"https://github.com/sede-open/Fleming","Summary":"Open-source project of the \"brain\" of the ai discovery tool. Includes technical scripts to build, register, serve and query models on databricks. Models can be run on cpu and not gpu providing signiifcant cost reductions. Databricks is utilized to build and train machine learning models on the ingested data. "}{"filter":{"LicenceFileContent":"Apache License 2.0","Archived":"Active"}}
+
+        """
+
+        exclude_cols = [item_name_column, item_link_column, item_summmary_column]
+        include_cols = [c for c in df.columns if c not in exclude_cols]
+        map_expr = create_map(*[item for c in include_cols for item in (lit(c), col(c))])
+        df = df.withColumn("filter", map_expr)
+
+        df = df.withColumn("dict_column", expr(f"map('Name', {item_name_column}, 'Link', {item_link_column}, 'Summary', {item_summmary_column})"))
+
+        df = df.withColumn("filter", create_map(lit("filter"), col("filter")))
+
+        df = df.withColumn("filter", to_json(col("filter")))
+        df = df.withColumn("dict_column", to_json(col("dict_column")))
+
+        df = df.withColumn("ReadMe_W_Answer", concat_ws("", col("dict_column"),col("filter")))
+
+        # COLLECTING ONLY THE README_W_ANSWER TEXT INFORMATION AS THE CORPUS
+        corpus = [row['ReadMe_W_Answer'] for row in df.collect()]
 
         return corpus
 
