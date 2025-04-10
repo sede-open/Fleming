@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import logging
-from pyspark.sql.functions import concat_ws, expr,to_json, col, create_map, lit
+from pyspark.sql.functions import col, lit, expr, create_map, to_json, concat_ws, regexp_replace
 from pyspark.sql import DataFrame, SparkSession
 
 
@@ -111,6 +111,7 @@ class CorpusTextCreation:
         df = df.withColumn("dict_column", to_json(col("dict_column")))
 
         df = df.withColumn("ReadMe_W_Answer", concat_ws("", col("dict_column"),col("filter")))
+        df = df.withColumn("ReadMe_W_Answer", regexp_replace("ReadMe_W_Answer", r"\}\{", ","))
 
         # COLLECTING ONLY THE README_W_ANSWER TEXT INFORMATION AS THE CORPUS
         corpus = [row['ReadMe_W_Answer'] for row in df.collect()]
