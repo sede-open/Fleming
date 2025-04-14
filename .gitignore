@@ -277,8 +277,6 @@ acs-*.bib
 # hyperref
 *.brf
 
-*.png
-
 *.jpg
 *.jpeg
 
