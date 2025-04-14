@@ -1,5 +1,5 @@
 # Project information
-site_name: Project Fleming - The Brain
+site_name: Project Fleming
 site_url:  https://projectfleming.tech
 site_author: Innersource Enablement Team
 site_description: >-
@@ -106,7 +106,7 @@ extra:
     - icon: simple/github
       link: https://github.com/sede-open/Fleming
 
-copyright: Copyright © [2024] Shell Global Solutions International B.V. All Rights Reserved.
+copyright: Copyright © [2025] Shell Global Solutions International B.V. All Rights Reserved.
 
 nav:
   - Home: index.md
@@ -120,6 +120,8 @@ nav:
       - GitHub Repository Summary:
           - Github Extraction and Tokenisation: getting-started/tokenisation-of-git-repo.md
           - Code Summarisation using LLM: getting-started/code-summary-how-to.md
+      - Deploying the User Interface:
+          - Deploying the UI: getting-started/deploying-the-frontend.md
   - Code Reference:
       - Discovery:
           - CorpusTextCreation: code-reference/CorpusTextCreation.md
