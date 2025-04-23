@@ -7,7 +7,7 @@ authors:
 # Introducing the New Generic UI for Fleming
 
 <center>
-![ui](./images/generic_ui.png){width=75%} 
+<img src="https://projectfleming.tech/images/generic_ui.png" alt="ui" style="width: 75%;">
 </center>
 
 We are excited to announce the launch of our new generic user interface (UI) for Fleming!
