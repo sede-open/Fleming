@@ -7,7 +7,7 @@ authors:
 # Introducing Project Fleming: Enhancing Code Reuse and Efficiency with AI Discovery
 
 <center>
-![code_summary](../images/code_summary.png){width=75%} 
+![code_summary](./images/code_summary.png){width=75%} 
 </center>
 
 

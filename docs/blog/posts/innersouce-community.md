@@ -7,7 +7,7 @@ authors:
 # Introducing Project Fleming: Enhancing Code Reuse and Efficiency with AI Discovery
 
 <center>
-![GlassImage](../images/glass_discovery.png){width=75%} 
+![GlassImage](./images/glass_discovery.png){width=75%} 
 </center>
 
 Today, Shell’s Inner Source Enablement Team has released key packages for a new AI-powered Discovery Tool. These packages are available for Open Source use.
