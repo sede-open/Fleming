@@ -1,5 +1,25 @@
 # Releases 
 
+# V0.0.4
+
+## What's Changed
+* Updating release notes by @BensGitShell in https://github.com/sede-open/Fleming/pull/21
+* Adding code summary image by @BensGitShell in https://github.com/sede-open/Fleming/pull/22
+* Update test_fourO_mini_summary.py by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/23
+* Merge to ensure develop and main match by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/24
+* Feature/00005 - Automation of pypi packaging upon releases. by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/25
+* Develop by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/26
+* Update ci.yml by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/27
+* Feature/00006 to develop by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/28
+* Develop to main by @Amber-Rigg in https://github.com/sede-open/Fleming/pull/29
+* Bump @babel/runtime from 7.26.9 to 7.27.0 in /src/fleming_ui by @dependabot in https://github.com/sede-open/Fleming/pull/30
+* Bump next from 15.2.1 to 15.2.4 in /src/fleming_ui by @dependabot in https://github.com/sede-open/Fleming/pull/31
+
+## New Contributors
+* @dependabot made their first contribution in https://github.com/sede-open/Fleming/pull/30
+
+**Full Changelog**: https://github.com/sede-open/Fleming/compare/v0.0.3...v0.0.4
+
 # V0.0.3
 
 ## What's Changed
