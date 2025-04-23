@@ -7,7 +7,7 @@ authors:
 # Project Fleming is now available on PyPI
 
 <center>
-![pypi](../images/pypi.png){width=75%} 
+![pypi](./images/pypi.png){width=75%} 
 </center>
 
 Exciting News!
