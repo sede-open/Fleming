@@ -185,3 +185,105 @@ class ModelServe:
 
             return response.json()
             raise
+
+class ModelServewithMosaicAI:
+    def __init__(
+        self,
+        spark: SparkSession,
+        endpoint_name: str,
+        model_name: str,
+        workload_type: str,
+        workload_size: str,
+        scale_to_zero: bool,
+        API_ROOT: str = None,
+        API_TOKEN: str = None,
+        enable_usage_logging: bool = True,
+        enable_payload_logging: bool = True,
+        enable_guardrails: bool = True,
+        rate_limit_rps: int = 10,
+        rate_limit_concurrent: int = 5,
+        access_control_enabled: bool = False,
+        allowed_user_ids: list = None,
+    ) -> None:
+        self.spark = spark
+        self.endpoint_name = endpoint_name
+        self.model_name = model_name
+        self.workload_type = workload_type
+        self.workload_size = workload_size
+        self.scale_to_zero = scale_to_zero
+        self.API_ROOT = API_ROOT
+        self.API_TOKEN = API_TOKEN
+
+        # Mosaic AI Gateway settings
+        self.enable_usage_logging = enable_usage_logging
+        self.enable_payload_logging = enable_payload_logging
+        self.enable_guardrails = enable_guardrails
+        self.rate_limit_rps = rate_limit_rps
+        self.rate_limit_concurrent = rate_limit_concurrent
+        self.access_control_enabled = access_control_enabled
+        self.allowed_user_ids = allowed_user_ids or []
+
+    def _build_config(self):
+        return {
+            "served_entities": [
+                {
+                    "name": self.model_name,
+                    "entity_name": self.model_name,
+                    "entity_version": max(
+                        MlflowClient().get_latest_versions(self.model_name),
+                        key=lambda v: v.version,
+                    ).version,
+                    "workload_type": self.workload_type,
+                    "workload_size": self.workload_size,
+                    "scale_to_zero_enabled": self.scale_to_zero,
+                }
+            ],
+            "traffic_config": {
+                "routes": [
+                    {
+                        "served_model_name": self.model_name,
+                        "traffic_percentage": 100,
+                    }
+                ]
+            },
+            "ai_gateway_config": {
+                "usage_logging_enabled": self.enable_usage_logging,
+                "payload_logging_enabled": self.enable_payload_logging,
+                "guardrails_enabled": self.enable_guardrails,
+                "rate_limit": {
+                    "requests_per_second": self.rate_limit_rps,
+                    "concurrent_requests": self.rate_limit_concurrent,
+                },
+                "access_control": {
+                    "enabled": self.access_control_enabled,
+                    "allowed_user_ids": self.allowed_user_ids,
+                },
+            },
+        }
+
+    def deploy_endpoint(self) -> None:
+        config = self._build_config()
+
+        try:
+            client = get_deploy_client("databricks")
+            client.create_endpoint(
+                name=self.endpoint_name,
+                config=config,
+            )
+        except requests.exceptions.RequestException as e:
+            put_url = f"/api/2.0/serving-endpoints/{self.endpoint_name}/config"
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.API_TOKEN}",
+            }
+
+            response = requests.put(
+                url=f"{self.API_ROOT}{put_url}", json=config, headers=headers
+            )
+
+            if response.status_code != 200:
+                raise requests.exceptions.RequestException(
+                    f"Request failed with status {response.status_code}, {response.text}"
+                )
+
+            return response.json()
