@@ -52,7 +52,7 @@ INSTALL_REQUIRES = [
     "mkdocs-material-extensions==1.3.1",
     "mkdocstrings==0.25.0",
     "mkdocstrings-python==1.10.8",
-    "mkdocs-macros-plugin==1.0.1"    
+    "mkdocs-macros-plugin==1.0.1",
 ]
 
 PYSPARK_PACKAGES = [

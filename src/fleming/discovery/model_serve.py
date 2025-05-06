@@ -26,7 +26,7 @@ class ModelServe:
     --------
     ```python
 
-    from fleming.discovery.corpus_creation import CorpusCreation
+    from fleming.discovery.model_serve import ModelServe
     from pyspark.sql import SparkSession
 
     # Not required if using Databricks
@@ -186,7 +186,70 @@ class ModelServe:
             return response.json()
             raise
 
+
 class ModelServewithMosaicAI:
+    """
+    A class which allows for creating a model serving endpoint on databricks with Mosaic AI.
+
+    Example:
+    --------
+    ```python
+
+    from fleming.discovery.model_serve import ModelServewithMosaicAI
+    from pyspark.sql import SparkSession
+
+    # Not required if using Databricks
+    spark = SparkSession.builder.appName("model_serving").getOrCreate()
+
+    # Set the name of the MLflow endpoint
+    endpoint_name = "aidiscoverytool"
+    print(f'Endpoint name: {endpoint_name}')
+
+    # Name of the registered MLflow model
+    model_name = "BERT_Semantic_Search"
+    print(f'Model name: {model_name}')
+
+    # Get the latest version of the MLflow model
+    latest_version = max(MlflowClient().get_latest_versions(model_name), key=lambda v: v.version)
+    model_version = latest_version.version
+    print(f'Model version: {model_version}')
+
+    # Specify the type of compute (CPU, GPU_SMALL, GPU_LARGE, etc.)
+    workload_type = "CPU"
+    print(f'Workload type: {workload_type}')
+
+    # Specify the scale-out size of compute (Small, Medium, Large, etc.)
+    workload_size = "Small"
+    print(f'Workload size: {workload_size}')
+
+    # Specify Scale to Zero(only supported for CPU endpoints)
+    scale_to_zero = False
+    print(f'Scale to zero: {scale_to_zero}')
+
+    API_ROOT = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiUrl().get()
+    API_TOKEN = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiToken().get()
+
+    model_serve = ModelServewithMosaicAI(endpoint_name, model_name, workload_type, workload_size, scale_to_zero, API_ROOT, API_TOKEN)
+    model_serve.deploy_endpoint()
+
+    ```
+
+    Parameters:
+        endpoint_name (str): The name of the model serving endpoint.
+        model_name (str): The name of the model to be served.
+        workload_type (str): The type of compute to be used for the endpoint.
+        workload_size (str): The scale-out size of the compute.
+        scale_to_zero (bool): Whether to scale the compute to zero when not in use.
+        API_ROOT (str): The API root of the Databricks workspace.
+        API_TOKEN (str): The API token of the Databricks workspace.
+        ebable_usage_logging (bool): Whether to enable usage logging.
+        enable_payload_logging (bool): Whether to enable payload logging.
+        rate_limit_rps (int): The rate limit in requests per second.
+        rate_limit_concurrent (int): The rate limit for concurrent requests.
+        access_control_enabled (bool): Whether to enable access control.
+        allowed_user_ids (list): List of user IDs allowed to access the endpoint.
+    """
+
     def __init__(
         self,
         spark: SparkSession,
@@ -199,7 +262,6 @@ class ModelServewithMosaicAI:
         API_TOKEN: str = None,
         enable_usage_logging: bool = True,
         enable_payload_logging: bool = True,
-        enable_guardrails: bool = True,
         rate_limit_rps: int = 10,
         rate_limit_concurrent: int = 5,
         access_control_enabled: bool = False,
@@ -213,11 +275,9 @@ class ModelServewithMosaicAI:
         self.scale_to_zero = scale_to_zero
         self.API_ROOT = API_ROOT
         self.API_TOKEN = API_TOKEN
-
         # Mosaic AI Gateway settings
         self.enable_usage_logging = enable_usage_logging
         self.enable_payload_logging = enable_payload_logging
-        self.enable_guardrails = enable_guardrails
         self.rate_limit_rps = rate_limit_rps
         self.rate_limit_concurrent = rate_limit_concurrent
         self.access_control_enabled = access_control_enabled
@@ -249,7 +309,6 @@ class ModelServewithMosaicAI:
             "ai_gateway_config": {
                 "usage_logging_enabled": self.enable_usage_logging,
                 "payload_logging_enabled": self.enable_payload_logging,
-                "guardrails_enabled": self.enable_guardrails,
                 "rate_limit": {
                     "requests_per_second": self.rate_limit_rps,
                     "concurrent_requests": self.rate_limit_concurrent,
