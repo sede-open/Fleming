@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock, patch
 
-from src.fleming.discovery.model_serve import ModelServe
+from src.fleming.discovery.model_serve import ModelServe, ModelServewithMosaicAI
 
 
 def test_deploy_endpoint(spark_session):
@@ -27,6 +27,32 @@ def test_deploy_endpoint(spark_session):
         pass
     # Call the method
     model_serve = ModelServe(
+        spark=spark_session,
+        endpoint_name="test_endpoint",
+        model_name="test_model",
+        workload_type="CPU",
+        workload_size="Small",
+        scale_to_zero=True,
+        API_ROOT="http://test-api-root",
+        API_TOKEN="test-api-token",
+    )
+
+    try:
+        model_serve.deploy_endpoint()
+    except Exception as e:
+        f"An error occurred: {e}"
+
+
+def test_deploy_endpoint_mosiaicAI(spark_session):
+    # Mock the requests.put response
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = {"status": "success"}
+    mock_requests_put = MagicMock(return_value=mock_response)
+    with patch("requests.put", mock_requests_put):
+        pass
+    # Call the method
+    model_serve = ModelServewithMosaicAI(
         spark=spark_session,
         endpoint_name="test_endpoint",
         model_name="test_model",
