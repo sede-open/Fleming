@@ -1,24 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Greetings from "./components/greetings";
-import Search from "./components/search";
-import Filters from "./components/filter";
-import Results, { Result } from "./components/result";
+import Greetings from "./_components/greetings";
+import Search from "./_components/search";
+import Filters from "./_components/filter";
+import Results, { Result } from "./_components/result";
 import useSWR from 'swr';
-import fetcher from "@/utils/fetcher";
-import Loading from "./components/loading";
-import Error from "./components/error";
+import { createCustomFetcher } from "@/utils/custom-fetcher";
+import Loading from "./_components/loading";
+import Error from "./_components/error";
 
 export default function Home() {
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("score");
+  const [customSettings, setCustomSettings] = useState<{ customApiUrl?: string; customAuthToken?: string }>({});
+
+  // Create custom fetcher with current settings
+  const customFetcher = createCustomFetcher(customSettings);
+  // Create a unique cache key that includes custom settings
+  const cacheKey = searchQuery
+    ? JSON.stringify({
+        url: `/api/predictions?query=${encodeURIComponent(searchQuery)}`,
+        customApiUrl: customSettings.customApiUrl,
+        customAuthToken: customSettings.customAuthToken
+      })
+    : null;
 
   const { data, error, isLoading } = useSWR(
-    searchQuery ? `/api/predictions?query=${encodeURIComponent(searchQuery)}` : null,
-    fetcher,
+    cacheKey,
+    () => customFetcher(`/api/predictions?query=${encodeURIComponent(searchQuery)}`),
     {
       revalidateOnFocus: false,
       refreshInterval: 0,
@@ -26,12 +38,20 @@ export default function Home() {
     }
   );
 
-  const results = searchQuery ? (data || []) : [];
+  const results = searchQuery ? (data ?? []) : [];
+
+  const handleAdvancedSettingsChange = useCallback((settings: { customApiUrl?: string; customAuthToken?: string }) => {
+    setCustomSettings(settings);
+  }, []);
 
   return (
     <div className="flex flex-col">
       <Greetings />
-      <Search setShowFilters={setShowFilters} setSearchQuery={setSearchQuery} />
+      <Search
+        setShowFilters={setShowFilters}
+        setSearchQuery={setSearchQuery}
+        onAdvancedSettingsChange={handleAdvancedSettingsChange}
+      />
 
       {/* Animated Filters */}
       <AnimatePresence>

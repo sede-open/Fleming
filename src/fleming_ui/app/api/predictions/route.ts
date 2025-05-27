@@ -5,7 +5,15 @@ export async function GET(
   request: Request
 ) {
   try {
-    const api = process.env.ML_API;
+    // Get custom settings from headers
+    const customApiUrl = request.headers.get('x-custom-api-url');
+    const customAuthToken = request.headers.get('x-custom-auth-token');
+
+    // Use custom API URL if provided, otherwise use environment variable
+    const api = customApiUrl || process.env.ML_API;
+
+    // Use custom auth token if provided, otherwise use environment variable
+    const authToken = customAuthToken || process.env.API_AUTH_TOKEN;
 
     // Extract query parameter from URL
     const { searchParams } = new URL(request.url);
@@ -19,7 +27,7 @@ export async function GET(
     const response = await fetch(`${api}`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.API_AUTH_TOKEN}`,
+        "Authorization": `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -37,8 +45,6 @@ export async function GET(
     if (!data) {
       throw new Error("No data received from the API");
     }
-
-    console.log(data)
 
     const transformedData = TransformData(data);
     return NextResponse.json(transformedData, { status: 200 });
