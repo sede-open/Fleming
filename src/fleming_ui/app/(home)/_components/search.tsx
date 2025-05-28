@@ -2,16 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FilterIcon, SearchIcon } from "lucide-react";
 import { useState } from "react";
-import AdvancedSettings from "./advanced-settings";
 
 const Search = ({
     setShowFilters,
-    setSearchQuery,
-    onAdvancedSettingsChange
+    setSearchQuery
 }: {
     setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
     setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-    onAdvancedSettingsChange?: (settings: { customApiUrl?: string; customAuthToken?: string }) => void;
 }) => {
     const [inputValue, setInputValue] = useState("");
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,9 +37,6 @@ const Search = ({
                 <FilterIcon className="w-4 h-4" />
                 Filter
             </Button>
-            {onAdvancedSettingsChange && (
-                <AdvancedSettings onSettingsChange={onAdvancedSettingsChange} />
-            )}
         </div>
     );
 }
