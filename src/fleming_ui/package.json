@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-popover": "^1.1.6",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.2",
@@ -20,7 +21,7 @@
     "cmdk": "^1.0.0",
     "framer-motion": "^12.4.10",
     "lucide-react": "^0.479.0",
-    "next": "15.2.4",
+    "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "swr": "^2.3.3",

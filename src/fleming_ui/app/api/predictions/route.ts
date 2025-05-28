@@ -5,7 +5,12 @@ export async function GET(
   request: Request
 ) {
   try {
-    const api = process.env.ML_API;
+    const customApiUrl = request.headers.get('x-custom-api-url');
+    const customAuthToken = request.headers.get('x-custom-auth-token')
+
+    const api = customApiUrl ?? process.env.ML_API;
+
+    const authToken = customApiUrl ? customAuthToken : process.env.API_AUTH_TOKEN;
 
     // Extract query parameter from URL
     const { searchParams } = new URL(request.url);
@@ -16,12 +21,17 @@ export async function GET(
       return NextResponse.json([], { status: 200 });
     }
 
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+    };
+
+    if (authToken) {
+      headers["Authorization"] = `Bearer ${authToken}`;
+    }
+
     const response = await fetch(`${api}`, {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.API_AUTH_TOKEN}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({
         inputs: [query],
       }),
@@ -38,15 +48,12 @@ export async function GET(
       throw new Error("No data received from the API");
     }
 
-    console.log(data)
-
     const transformedData = TransformData(data);
     return NextResponse.json(transformedData, { status: 200 });
   } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json(
+    if (error instanceof Error) {      return NextResponse.json(
         { error: error.message },
-        { status: (error.cause as { status?: number })?.status || 500 }
+        { status: (error.cause as { status?: number })?.status ?? 500 }
       );
     }
 
