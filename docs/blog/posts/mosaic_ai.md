@@ -51,7 +51,7 @@ Purpose: Load balances traffic across multiple models.
 
 Functionality: Useful for A/B testing or gradual rollouts.
 
-Support: Supported for external, provisioned foundation model APIs, and custom model endpoints 1.
+Support: Supported for external, provisioned foundation model APIs, and custom model endpoints.
 
 ## 🔍 Further Features of Mosaic AI available with Databricks
 
@@ -61,7 +61,7 @@ Purpose: Prevents unsafe or non-compliant data from being processed.
 
 Functionality: Filters out harmful or unwanted content in both requests and responses.
 
-Support: Available for most model endpoints except Mosaic AI agents 1.
+Support: Available for most model endpoints except Mosaic AI agents.
 
 ### 🔁 Fallbacks
 
@@ -69,7 +69,7 @@ Purpose: Ensures reliability by minimizing production outages.
 
 Functionality: Automatically switches to backup models or endpoints if the primary fails.
 
-Support: Currently only supported for external model endpoints 1.
+Support: Currently only supported for external model endpoints.
 
 
 ## 🌐 Why This Matters
