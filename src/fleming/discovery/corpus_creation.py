@@ -13,7 +13,15 @@
 # limitations under the License.
 
 import logging
-from pyspark.sql.functions import col, lit, expr, create_map, to_json, concat_ws, regexp_replace
+from pyspark.sql.functions import (
+    col,
+    lit,
+    expr,
+    create_map,
+    to_json,
+    concat_ws,
+    regexp_replace,
+)
 from pyspark.sql import DataFrame, SparkSession
 
 
@@ -82,8 +90,10 @@ class CorpusTextCreation:
         corpus = [row["ConcatColumns"] for row in df.collect()]
 
         return corpus
-    
-    def concat_columns(self, df, item_name_column, item_link_column, item_summmary_column) -> list:
+
+    def concat_columns(
+        self, df, item_name_column, item_link_column, item_summmary_column
+    ) -> list:
         """
         Concatenate the columns to create the corpus
 
@@ -100,21 +110,32 @@ class CorpusTextCreation:
 
         exclude_cols = [item_name_column, item_link_column, item_summmary_column]
         include_cols = [c for c in df.columns if c not in exclude_cols]
-        map_expr = create_map(*[item for c in include_cols for item in (lit(c), col(c))])
+        map_expr = create_map(
+            *[item for c in include_cols for item in (lit(c), col(c))]
+        )
         df = df.withColumn("filter", map_expr)
 
-        df = df.withColumn("dict_column", expr(f"map('Name', {item_name_column}, 'Link', {item_link_column}, 'Summary', {item_summmary_column})"))
+        df = df.withColumn(
+            "dict_column",
+            expr(
+                f"map('Name', {item_name_column}, 'Link', {item_link_column}, 'Summary', {item_summmary_column})"
+            ),
+        )
 
         df = df.withColumn("filter", create_map(lit("filter"), col("filter")))
 
         df = df.withColumn("filter", to_json(col("filter")))
         df = df.withColumn("dict_column", to_json(col("dict_column")))
 
-        df = df.withColumn("ReadMe_W_Answer", concat_ws("", col("dict_column"),col("filter")))
-        df = df.withColumn("ReadMe_W_Answer", regexp_replace("ReadMe_W_Answer", r"\}\{", ","))
+        df = df.withColumn(
+            "ReadMe_W_Answer", concat_ws("", col("dict_column"), col("filter"))
+        )
+        df = df.withColumn(
+            "ReadMe_W_Answer", regexp_replace("ReadMe_W_Answer", r"\}\{", ",")
+        )
 
         # COLLECTING ONLY THE README_W_ANSWER TEXT INFORMATION AS THE CORPUS
-        corpus = [row['ReadMe_W_Answer'] for row in df.collect()]
+        corpus = [row["ReadMe_W_Answer"] for row in df.collect()]
 
         return corpus
 

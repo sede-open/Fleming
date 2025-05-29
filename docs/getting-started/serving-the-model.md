@@ -10,7 +10,7 @@ For more information about options within the Class please follow the documentat
 
 ```python  
 
-from fleming.discovery.corpus_creation import CorpusCreation
+from fleming.discovery.model_serve import ModelServewithMosaicAI, ModelServe
 from pyspark.sql import SparkSession
 
 # Not required if using Databricks
@@ -43,6 +43,11 @@ print(f'Scale to zero: {scale_to_zero}')
 API_ROOT = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiUrl().get()
 API_TOKEN = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiToken().get()
 
+# You can now choose how you serve your model, with or without Mosaic AI
+
 model_serve = ModelServe(endpoint_name, model_name, workload_type, workload_size, scale_to_zero, API_ROOT, API_TOKEN)
+model_serve.deploy_endpoint()
+
+model_serve = ModelServewithMosaicAI(endpoint_name, model_name, workload_type, workload_size, scale_to_zero, API_ROOT, API_TOKEN)
 model_serve.deploy_endpoint()
 ```
