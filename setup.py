@@ -45,7 +45,7 @@ INSTALL_REQUIRES = [
     "PyGithub==2.5.0",
     "jwt==1.3.1",
     "pytest-mock==3.14.0",
-    "requests<=2.32.3",
+    "requests<=2.32.4",
     "numpy>=1.23.4,<2.0.0",
     "pandas>=1.5.2,<2.2.0",
     "mkdocs-material==9.5.20",
