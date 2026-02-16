@@ -21,7 +21,7 @@ dependencies:
     - python>=3.9,<3.12
     - pytest==7.4.0
     - pytest-mock==3.14.0
-    - requests<=2.32.3
+    - requests<=2.32.4
     - numpy>=1.23.4,<2.0.0
     - pandas>=1.5.2,<2.2.0
     - black>=24.1.0
